@@ -20,14 +20,14 @@ INSERT into JKF VALUES
 (14, "Jacket", 350, "Men", "L", "Yes"),
 (15, "Socks", 60, "Men", "S", "Yes");
 
---display the database ordered by price
+--Display the database ordered by price
 SELECT * FROM JKF
 ORDER BY item_price ASC;
 
---what is the total price of all item in women section
+--What is the total price of all item in women section
 SELECT sum(item_price) AS Total_Price FROM JKF 
 WHERE item_section like "Women";
 
--- Find out all the unavailable items from baby section
+--Find out all the unavailable items from baby section
 SELECT * FROM JKF
 WHERE item_availability = "No" AND item_section = "Baby";
