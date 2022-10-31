@@ -1,3 +1,5 @@
+--Answer below questions using data from the table
+
 #1. Display the database ordered by price
     SELECT * FROM JKF
     ORDER BY item_price ASC;
