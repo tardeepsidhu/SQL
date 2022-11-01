@@ -1,7 +1,6 @@
-/*
-Sales from an online furniture store
-Collected by: https://www.khanacademy.org/profile/charlesb2000/
-*/
+#Sales from an online furniture store (Data from Khan Academy)
+#Collected by: https://www.khanacademy.org/profile/charlesb2000/
+
 
 CREATE TABLE sales(
   ID INTEGER  NOT NULL PRIMARY KEY
