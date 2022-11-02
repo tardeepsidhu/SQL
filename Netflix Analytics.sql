@@ -28,9 +28,10 @@
     WHERE titles.title = 'Bright Star';
 
 #5. What is the oldest movie in the database and what year was it made?
-    SELECT
-    title, release_year
-    FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" 
+    SELECT title, release_year 
+    FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
     WHERE type = 'Movie'
-    ORDER BY release_year asc
-    LIMIT 1;
+    AND release_year <= 
+    (SELECT MIN(release_year)   
+    FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    WHERE type = 'Movie'); 
