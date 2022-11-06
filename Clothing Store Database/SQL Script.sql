@@ -1,4 +1,4 @@
---Answer below questions using data from the table
+#Answer below questions using data from the table
 
 #1. Display the database ordered by price
     SELECT * FROM JKF
