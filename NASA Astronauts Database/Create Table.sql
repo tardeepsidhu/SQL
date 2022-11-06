@@ -1,5 +1,5 @@
--- NASA Astronauts, 1959-Present
--- Source: https://www.kaggle.com/nasa/astronaut-yearbook
+#NASA Astronauts, 1959-Present
+#Source: https://www.kaggle.com/nasa/astronaut-yearbook
 
 CREATE TABLE astronauts(
    Name                TEXT PRIMARY KEY,
