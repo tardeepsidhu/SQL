@@ -1,4 +1,4 @@
-# Insert data into the table
+#Insert data into the table
 
 INSERT into JKF VALUES 
 (1, "Shirt", 50, "Men", "M", "Yes"),
