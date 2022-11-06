@@ -1,4 +1,4 @@
--- Create a clothing store database
+#Create a clothing store database
 
 CREATE table JKF 
 (id integer PRIMARY KEY, 
