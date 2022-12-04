@@ -34,7 +34,7 @@
     GROUP BY Product;
 
 #7. How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
-    SELECT count(c.acctnum), AVG(Quantity*price)
+    SELECT count(DISTINCT c.acctnum), AVG(Quantity*price)
     FROM BIT_DB.FebSales f
     LEFT JOIN BIT_DB.customers c
     ON f.OrderID = c.order_id
@@ -58,3 +58,23 @@
      FROM BIT_DB.FebSales
      WHERE Product like '%Headphone%'
      GROUP BY Product;
+
+#11. What was the average amount spent per account in February?
+     SELECT sum(quantity*price)/count(c.acctnum)
+     FROM BIT_DB.FebSales f
+     JOIN BIT_DB.customers c
+     ON f.orderid = c.order_id;
+     
+#12. What was the average quantity of products purchased per account in February?
+     SELECT AVG(quantity) 
+     FROM BIT_DB.FebSales f
+     JOIN BIT_DB.customers c
+     ON f.orderid = c.order_id;
+
+#13. Which product brought in the most revenue in January and how much revenue did it bring in total?
+     SELECT Product, SUM(quantity*price) as Revenue
+     FROM BIT_DB.JanSales
+     GROUP BY Product
+     ORDER BY Revenue DESC
+     LIMIT 1;
+  
