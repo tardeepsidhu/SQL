@@ -100,3 +100,83 @@
      ORDER BY TotalSales DESC
      LIMIT 1;
 
+
+#15. Find the total revenue by genre and list genre name and total revenue from highest to lowest revenue.
+     SELECT g.Name as Genre_Name, ROUND(SUM(i.Total), 2) as Total_Revenue
+     FROM chinook.invoices i
+     JOIN chinook.invoice_items it
+     ON i.InvoiceId = it.InvoiceId
+     JOIN chinook.tracks t
+     ON it.TrackId = t.TrackId
+     JOIN chinook.genres g
+     ON t.GenreId = g.GenreId
+     GROUP BY g.name
+     ORDER BY 2 DESC;
+
+#16. List top 10 countries by number of sales in 2012.
+     SELECT i.BillingCountry as Country, SUM(it.Quantity) as Total_Sales
+     FROM chinook.invoices i
+     JOIN chinook.invoice_items it
+     ON i.InvoiceId = it.InvoiceId
+     WHERE i.InvoiceDate LIKE '2012%'
+     GROUP BY 1
+     ORDER BY 2 DESC
+     LIMIT 10;
+
+#17. Find out top 5 songs by revenue in each playlist. List the track name, song revenue and playlist name.
+     SELECT Track, Total_Revenue, Playlist, RN
+     FROM
+     (
+     SELECT t.Name as Track, ROUND(SUM(i.Total),2) as Total_Revenue, p.Name as Playlist, 
+            ROW_NUMBER() OVER (Partition by p.Name ORDER BY ROUND(SUM(i.Total),2) DESC) as RN
+     FROM chinook.tracks t
+     JOIN chinook.invoice_items it
+     ON t.TrackId = it.TrackId
+     JOIN chinook.invoices i
+     ON it.InvoiceId = i.InvoiceId
+     JOIN chinook.playlist_track pt
+     ON t.TrackId = pt.TrackId
+     JOIN chinook.playlists p
+     ON pt.PlaylistId = p.PlaylistId
+     GROUP BY 1
+     )
+     WHERE RN <= 5;
+
+#18. Which media type is most sold in 2013?
+     SELECT m.Name as Media_Type
+     FROM chinook.media_types m
+     JOIN chinook.tracks t
+     ON m.MediaTypeId = t.MediaTypeId
+     JOIN chinook.invoice_items it
+     ON t.TrackId = it.TrackId
+     JOIN chinook.invoices i
+     ON it.InvoiceId = i.InvoiceId
+     WHERE i.InvoiceDate LIKE '2013%'
+     GROUP BY 1
+     ORDER BY sum(Quantity) DESC
+     LIMIT 1;
+
+#19. List top 10 artists by number of tracks released in 2011.
+     SELECT a.Name AS Artist, COUNT(DISTINCT t.TrackId) as Total_Tracks_Released_in_2011
+     FROM chinook.tracks t
+     JOIN chinook.albums al
+     ON t.AlbumId = al.AlbumId
+     JOIN chinook.artists a
+     ON al.ArtistId = a.ArtistId
+     JOIN chinook.invoice_items it
+     ON t.TrackID = it.TrackId
+     JOIN chinook.invoices i
+     ON it.InvoiceId = i.InvoiceId
+     WHERE i.InvoiceDate LIKE '2011%'
+     GROUP BY 1
+     ORDER BY 2 DESC
+     LIMIT 10;
+
+
+#20. List the customers by their total spending from highest to lowest. Include customer name, country and total spending.
+     SELECT c.FirstName, c.LastName, c.Country, SUM(i.Total) as Total_Spent
+     FROM chinook.customers c
+     JOIN chinook.invoices i
+     ON c.CustomerId = i.CustomerId
+     GROUP BY c.CustomerId
+     ORDER BY 4 DESC;
