@@ -1,6 +1,6 @@
 #Example query (PostgreSQL) from "https://bit.io/CharlotteChaze/BreakIntoTech"
 
-#In this SQL code, I'm querying a database that's holding Nexflix data to answer below questions about the data.
+#In this SQL code, I'm querying a database that's holding Nexflix data to answer below questions about the data using PostgresSQL.
 
 #1. How many movie titles are there in the database? (movies only, not tv shows)
     SELECT
